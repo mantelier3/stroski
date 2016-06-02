@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<script type="text/javascript">
+	var osebe = ["Aleš","Barbara","Dejan","Janja","Katarina","Kristjan","Maja","Martin"];
+	var asdf = {};
+	var poletje = true;
+	var odsotnosti_vrednost = poletje ? 1.5 : 4;
+	var obisk_vrednost = 0.8;
+	var pranje_vrednost = 1.5;
+	var pralci = ["Tilen","Denis","Kristjan","Maja"];
+	function LoadMyJs(scriptName) {
+		var docHeadObj = document.getElementsByTagName("head")[0];
+		var dynamicScript = document.createElement("script");
+		dynamicScript.type = "text/javascript";
+		dynamicScript.src = scriptName;
+		docHeadObj.appendChild(dynamicScript);
+	}
+	function setUp(){
+		for (i=0; i<osebe.length; i++){
+			document.getElementById("l"+(i+1)).value = osebe[i];
+		}
+	}
+	</script>
+	<style type="text/css">
+	input {width: 60px}
+	</style>
+	<title>Stroški</title>
+</head>
+<body onLoad="LoadMyJs('js/script.js');">
+<form><table>
+<tr><td><span>Elektrika: </span></td><td><input type="text" value=82.11 id="e"></td></tr>
+<tr><td><span>Plin:      </span></td><td><input type="text" value=60.67 id="p"></td></tr>
+<tr><td><span>Voda:      </span></td><td><input type="text" value=42.95 id="v"></td></tr>
+<tr><td><span>Snaga:     </span></td><td><input type="text" value=8.67 id="s"></td></tr>
+<tr><td><span>Telekom:   </span></td><td><input type="text" value=33.75 id="t"></td></tr>
+<tr><td><span>Ostalo:    </span></td><td><input type="text" value=1.9 id="o"></td></tr>
+</table></form>
+<form><table>
+	<th><td>Oseba</td><td>Odsotnosti</td><td>Obiski</td><td>Pranje</th>
+	<tr><td></td><td><input type="text" id="l1"></td>
+	<td><input type="text" value=0 id="m1"></td>
+	<td><input type="text" value=0 id="o1"></td>
+	<td><input type="checkbox" name="c1" value="c1" id="c1"></input></td>
+	<td><span id="s1"></span><td></tr>
+	<tr><td></td><td><input type="text" id="l2"></td>
+	<td><input type="text" value=0 id="m2"></td>
+	<td><input type="text" value=0 id="o2"></td>
+	<td><input type="checkbox" name="c2" value="c2" id="c2"></input></td>
+	<td><span id="s2"></span><td></tr>
+	<tr><td></td><td><input type="text" id="l3"></td>
+	<td><input type="text" value=0 id="m3"></td>
+	<td><input type="text" value=0 id="o3"></td>
+	<td><input type="checkbox" name="c3" value="c3" id="c3" checked></input></td>
+	<td><span id="s3"></span><td></tr>
+	<tr><td></td><td><input type="text" id="l4"></td>
+	<td><input type="text" value=0 id="m4"></td>
+	<td><input type="text" value=0 id="o4"></td>
+	<td><input type="checkbox" name="c4" value="c4" id="c4"></input></td>
+	<td><span id="s4"></span><td></tr>
+	<tr><td></td><td><input type="text" id="l5"></td>
+	<td><input type="text" value=0 id="m5"></td>
+	<td><input type="text" value=0 id="o5"></td>
+	<td><input type="checkbox" name="c5" value="c5" id="c5" checked></input></td>
+	<td><span id="s5"></span><td></tr>
+	<tr><td></td><td><input type="text" id="l6"></td>
+	<td><input type="text" value=0 id="m6"></td>
+	<td><input type="text" value=0 id="o6"></td>
+	<td><input type="checkbox" name="c6" value="c6" id="c6" checked></input></td>
+	<td><span id="s6"></span><td></tr>
+	<tr><td></td><td><input type="text" id="l7"></td>
+	<td><input type="text" value=0 id="m7"></td>
+	<td><input type="text" value=0 id="o7"></td>
+	<td><input type="checkbox" name="c7" value="c7" id="c7" checked></input></td>
+	<td><span id="s7"></span><td></tr>
+	<tr><td></td><td><input type="text" id="l8"></td>
+	<td><input type="text" value=0 id="m8"></td>
+	<td><input type="text" value=0 id="o8"></td>
+	<td><input type="checkbox" name="c8" value="c8" id="c8"></input></td>
+	<td><span id="s8"></span><td></tr>
+	<tr><td></td><td><button type="button" onclick="izracunaj()">Izračunaj</td></tr>
+	<tr><td></td><td><button type="button" onclick="LoadMyJs('js/script.js')">Reload script</td></tr>
+	<tr><td></td><td><button type="button" onclick="test()">Test</td></tr>
+	<tr><td></td><td><button type="button" onclick="sum_koncni_stroski()">Sum končni stroški</td></tr>
+
+</table></form>
+</body>
+<script type="text/javascript">
+	setUp();
+</script>
+</html>
