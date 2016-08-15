@@ -3,13 +3,13 @@
 <head>
 	<meta charset="utf-8">
 	<script type="text/javascript">
-	var osebe = ["Aleš","Barbara","Dejan","Janja","Katarina","Kristjan","Maja","Martin"];
+	var osebe_default = ["Aleš","Barbara","Dejan","Janja","Kristjan","Maja","Martin"];
 	var asdf = {};
 	var poletje = true;
-	var odsotnosti_vrednost = poletje ? 1.5 : 4;
-	var obisk_vrednost = 0.8;
-	var pranje_vrednost = 1.5;
-	var pralci = ["Tilen","Denis","Kristjan","Maja"];
+	var odsotnosti_vrednost = poletje ? 150 : 400; // vrednosti so v centih
+	var obisk_vrednost = 80;
+	var pranje_vrednost = 150;
+	var pralci = ["Dejan","Kristjan","Maja"];
 	function LoadMyJs(scriptName) {
 		var docHeadObj = document.getElementsByTagName("head")[0];
 		var dynamicScript = document.createElement("script");
@@ -18,8 +18,12 @@
 		docHeadObj.appendChild(dynamicScript);
 	}
 	function setUp(){
-		for (i=0; i<osebe.length; i++){
-			document.getElementById("l"+(i+1)).value = osebe[i];
+		for (i=0; i<osebe_default.length; i++){
+			document.getElementById("l"+(i+1)).value = osebe_default[i];
+			if (pralci.indexOf(osebe_default[i]) >= 0) {
+				console.log(osebe_default[i])
+				document.getElementById("c"+(i+1)).checked = true;
+			}
 		}
 	}
 	</script>
@@ -30,12 +34,12 @@
 </head>
 <body onLoad="LoadMyJs('js/script.js');">
 <form><table>
-<tr><td><span>Elektrika: </span></td><td><input type="text" value=82.11 id="e"></td></tr>
-<tr><td><span>Plin:      </span></td><td><input type="text" value=60.67 id="p"></td></tr>
-<tr><td><span>Voda:      </span></td><td><input type="text" value=42.95 id="v"></td></tr>
-<tr><td><span>Snaga:     </span></td><td><input type="text" value=8.67 id="s"></td></tr>
-<tr><td><span>Telekom:   </span></td><td><input type="text" value=33.75 id="t"></td></tr>
-<tr><td><span>Ostalo:    </span></td><td><input type="text" value=1.9 id="o"></td></tr>
+<tr><td><span>Elektrika: </span></td><td><input type="text" value=0 id="e"></td></tr>
+<tr><td><span>Plin:      </span></td><td><input type="text" value=0 id="p"></td></tr>
+<tr><td><span>Voda:      </span></td><td><input type="text" value=0 id="v"></td></tr>
+<tr><td><span>Snaga:     </span></td><td><input type="text" value=0 id="s"></td></tr>
+<tr><td><span>Telekom:   </span></td><td><input type="text" value=0 id="t"></td></tr>
+<tr><td><span>Ostalo:    </span></td><td><input type="text" value=0 id="o"></td></tr>
 </table></form>
 <form><table>
 	<th><td>Oseba</td><td>Odsotnosti</td><td>Obiski</td><td>Pranje</th>
@@ -52,7 +56,7 @@
 	<tr><td></td><td><input type="text" id="l3"></td>
 	<td><input type="text" value=0 id="m3"></td>
 	<td><input type="text" value=0 id="o3"></td>
-	<td><input type="checkbox" name="c3" value="c3" id="c3" checked></input></td>
+	<td><input type="checkbox" name="c3" value="c3" id="c3"></input></td>
 	<td><span id="s3"></span><td></tr>
 	<tr><td></td><td><input type="text" id="l4"></td>
 	<td><input type="text" value=0 id="m4"></td>
@@ -62,17 +66,17 @@
 	<tr><td></td><td><input type="text" id="l5"></td>
 	<td><input type="text" value=0 id="m5"></td>
 	<td><input type="text" value=0 id="o5"></td>
-	<td><input type="checkbox" name="c5" value="c5" id="c5" checked></input></td>
+	<td><input type="checkbox" name="c5" value="c5" id="c5"></input></td>
 	<td><span id="s5"></span><td></tr>
 	<tr><td></td><td><input type="text" id="l6"></td>
 	<td><input type="text" value=0 id="m6"></td>
 	<td><input type="text" value=0 id="o6"></td>
-	<td><input type="checkbox" name="c6" value="c6" id="c6" checked></input></td>
+	<td><input type="checkbox" name="c6" value="c6" id="c6"></input></td>
 	<td><span id="s6"></span><td></tr>
 	<tr><td></td><td><input type="text" id="l7"></td>
 	<td><input type="text" value=0 id="m7"></td>
 	<td><input type="text" value=0 id="o7"></td>
-	<td><input type="checkbox" name="c7" value="c7" id="c7" checked></input></td>
+	<td><input type="checkbox" name="c7" value="c7" id="c7"></input></td>
 	<td><span id="s7"></span><td></tr>
 	<tr><td></td><td><input type="text" id="l8"></td>
 	<td><input type="text" value=0 id="m8"></td>
@@ -81,8 +85,7 @@
 	<td><span id="s8"></span><td></tr>
 	<tr><td></td><td><button type="button" onclick="izracunaj()">Izračunaj</td></tr>
 	<tr><td></td><td><button type="button" onclick="LoadMyJs('js/script.js')">Reload script</td></tr>
-	<tr><td></td><td><button type="button" onclick="test()">Test</td></tr>
-	<tr><td></td><td><button type="button" onclick="sum_koncni_stroski()">Sum končni stroški</td></tr>
+	<tr><td></td><td><button type="button" onclick="sum_koncni_stroski()">Izpiši vsoto stroškov</td></tr>
 
 </table></form>
 </body>

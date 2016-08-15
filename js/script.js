@@ -1,9 +1,3 @@
-function test(){
-	alert("asddddddsdf");
-	console.log("asdf test "+asdf);
-}
-
-
 //osebe = ["Aleš","Barbara","Dejan","Denis","Janja","Kristjan","Maja","Martin"];
 
 //alert(pralci);
@@ -16,17 +10,34 @@ function sum_koncni_stroski(){
 }
 
 function izracunaj() {
-	for (i=0; i<osebe.length; i++){
-		var name = osebe[i];
-		document.getElementById("l"+(i+1)).value = name;
-		asdf[name] = new Array();
+	osebe = []
+	for (i=0; i<8; i++){
+		console.log("foooo")
+		//var name = osebe[i];
+		//document.getElementById("l"+(i+1)).value = name;
+		try {
+			name = document.getElementById("l"+(i+1)).value;
+			if (name == "") {
+				continue;
+			}
+			asdf[name] = new Array();
+			osebe.push(name)
+		}
+		catch (e) { 
+			if (e instanceof TypeError){
+				break;
+			}
+			else {
+			alert("error")
+			}
+		}
 	}
 	var stroski_crke = ["e","p","v","s","t","o"];
 	var stroski = {};
 	var sum = 0;
 	for (i=0; i<stroski_crke.length; i++){
 		var crka = stroski_crke[i];
-		stroski[crka] = parseFloat(document.getElementById(crka).value);
+		stroski[crka] = parseFloat(document.getElementById(crka).value.replace(',', '.'))*100;
 		console.log("stroski crka " +stroski[crka]);
 		sum += stroski[crka];
 	}
@@ -58,20 +69,24 @@ function izracunaj() {
 	console.log("ods_sum "+odsotnosti_sum);
 	console.log("obi "+obiski);
 	console.log("obi_sum "+obiski_sum);
-	tmp1 = (sum + odsotnosti_sum*odsotnosti_vrednost - (obiski_sum*obisk_vrednost) -(pranje_sum*pranje_vrednost));
+	tmp1 = (sum + odsotnosti_sum*odsotnosti_vrednost - 
+		   (obiski_sum*obisk_vrednost) -(pranje_sum*pranje_vrednost));
 	tmp = (Math.ceil(tmp1*(100/osebe.length))/(100/osebe.length))/osebe.length;
 	//tmp = Math.ceil(tmp * (100/osebe.length))/(100/osebe.length);
 	console.log("tmp rounded for average "+tmp);
 	var strosek_osebe = {};
 	var vsota_stroskov = 0;
 	console.log("pranje "+pranje);
-	console.log("pranje vrednost"+pranje_vrednost);
-	console.log("pranje vrednost multiplied"+pranje_vrednost*pranje[2]);
+	console.log("pranje vrednost "+pranje_vrednost);
+	console.log("pranje vrednost multiplied "+pranje_vrednost*pranje[2]);
 	for (i=0; i<osebe.length; i++){
-		console.log(pranje[i]*pranje_vrednost+"je pranje za osebo"+i);
-		strosek_osebe[osebe[i]] = tmp - odsotnosti[i]*odsotnosti_vrednost + obiski[i]*obisk_vrednost +pranje[i]*pranje_vrednost;
+		console.log(pranje[i]*pranje_vrednost+" je pranje za osebo "+i);
+		strosek_osebe[osebe[i]] = Math.round(tmp - odsotnosti[i]*odsotnosti_vrednost +
+							obiski[i]*obisk_vrednost +pranje[i]*pranje_vrednost)/100;
+		//strosek_osebe[osebe[i]] = parseFloat(strosek_osebe[osebe[i]])
 		document.getElementById("s"+(i+1)).textContent = (strosek_osebe[osebe[i]]);
 		vsota_stroskov += strosek_osebe[osebe[i]];
 	}
-	console.log("vsota stroskov " + vsota_stroskov);
+	console.log("vsota stroskov " + Math.round(vsota_stroskov*100)/100);
+	console.log(strosek_osebe)
 }
