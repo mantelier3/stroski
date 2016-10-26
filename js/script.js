@@ -10,6 +10,8 @@ function sum_koncni_stroski(){
 }
 
 function izracunaj() {
+	var poletje = document.getElementById("poletje").checked;
+	var odsotnosti_vrednost = poletje ? 150 : 400;
 	osebe = []
 	for (i=0; i<8; i++){
 		console.log("foooo")
