@@ -1,15 +1,5 @@
 //osebe = ["Aleš","Barbara","Dejan","Denis","Janja","Kristjan","Maja","Martin"];
 
-//alert(pralci);
-function sum_koncni_stroski(){
-    var sum = 0;
-    for (i=0; i<osebe.length; i++){
-        sum += $("#s"+(i+1)).innerHTML;
-    }
-    console.log("sum sum "+sum);
-}
-
-
 function izracunaj() {
     var vse_poloznice = ["elektrika","plin","vodovod","snaga","telekom","ostalo"];
     var stroski = {};
